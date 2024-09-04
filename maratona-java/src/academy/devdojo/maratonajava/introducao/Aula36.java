@@ -1,6 +1,6 @@
-package maratonajava.introducao;
+package academy.devdojo.maratonajava.introducao;
 
-public class Aula37 {
+public class Aula36 {
     public static void main(String[] args) {
         //1,2,3,4,5 Meses
         // 31,28,31,30 dias
@@ -18,12 +18,6 @@ public class Aula37 {
         for (int i = 0; i < dias.length; i++) {
             for (int j = 0; j < dias[i].length; j++) {
                 System.out.println(dias[i][j]);
-            }
-        }
-
-        for (int[] arrBase : dias) {
-            for (int num: arrBase) {
-                System.out.println(num);
             }
         }
     }
