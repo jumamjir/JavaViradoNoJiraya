@@ -1,0 +1,21 @@
+package academy.devdojo.maratonajava.javacore.Bintroducaometodos.test;
+
+import academy.devdojo.maratonajava.javacore.Bintroducaometodos.dominio.Funcionario;
+
+
+public class FuncionarioTest01 {
+    public static void main(String[] args) {
+
+        Funcionario funcionario = new Funcionario();
+
+        funcionario.nome = "Jaozin";
+        funcionario.idade = 12;
+        funcionario.salario = new float[]{1200.0f,1300.0f,1500.0f};
+
+        float mediaSalarios = funcionario.mediaSalario();
+
+        funcionario.imprime();
+        System.out.printf("A média dos salários é igual a: $%.2f", mediaSalarios);
+
+    }
+}
