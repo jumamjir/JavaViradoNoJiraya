@@ -8,9 +8,9 @@ public class FuncionarioTest01 {
 
         Funcionario funcionario = new Funcionario();
 
-        funcionario.nome = "Jaozin";
-        funcionario.idade = 12;
-        funcionario.salario = new float[]{1200.0f,1300.0f,1500.0f};
+        funcionario.setNome("Jaozin");
+        funcionario.setIdade(12);
+        funcionario.setSalario( new float[]{1200.0f,1300.0f,1500.0f});
 
         float mediaSalarios = funcionario.mediaSalario();
 
