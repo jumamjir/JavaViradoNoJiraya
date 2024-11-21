@@ -8,7 +8,7 @@ import java.nio.file.attribute.PosixFileAttributes;
 
 public class PosixFileAttributesTest01 {
     public static void main(String[] args) throws IOException {
-        Path path = Paths.get("home/joaopedro/file.txt");
+        Path path = Paths.get("/home/joaopedro/dev/file.txt");
         PosixFileAttributes posixFileAttributes = Files.readAttributes(path, PosixFileAttributes.class);
         System.out.println(posixFileAttributes.permissions());
     }
