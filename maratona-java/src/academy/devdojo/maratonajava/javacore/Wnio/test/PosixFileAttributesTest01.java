@@ -18,5 +18,6 @@ public class PosixFileAttributesTest01 {
         PosixFileAttributeView fileAttributeView = Files.getFileAttributeView(path, PosixFileAttributeView.class);
         Set<PosixFilePermission> posixFilePermissions = PosixFilePermissions.fromString("rw-rw-rw-");
         fileAttributeView.setPermissions(posixFilePermissions);
+        System.out.println(fileAttributeView.readAttributes().permissions());
     }
 }
