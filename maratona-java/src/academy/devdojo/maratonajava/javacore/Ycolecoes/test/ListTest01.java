@@ -5,17 +5,28 @@ import java.util.List;
 
 public class ListTest01 {
     public static void main(String[] args) {
-        List<String> nomes = new ArrayList<>(16); //1.4
-        nomes.add("João Pedro");
-        nomes.add("DevDojo Academy");
+        List<String> nomes = new ArrayList<>(16);
+        List<String> nomes2 = new ArrayList<>(16);
+        nomes.add("Joao Pedro");
+        nomes.add("DevDojo");
+        nomes2.add("Silva");
+        nomes2.add("Academy");
+
+//        System.out.println(nomes.remove("Joao Pedro"));
+        nomes.addAll(nomes2);
 
         for (String nome : nomes){
             System.out.println(nome);
         }
-        nomes.add("Madeira");
         System.out.println("---------");
-        for (int i = 0; i <nomes.size(); i++) {
+
+        int size = nomes.size();
+        for (int i = 0; i <size; i++) {
             System.out.println(nomes.get(i));
         }
+        List<Integer> numeros = new ArrayList<>();
+        numeros.add(1);
+
+
     }
 }
