@@ -22,6 +22,6 @@ public class SmartphoneListTest01 {
 
         System.out.println(smartphones.contains(s4));
         int indexSmartphone4 = smartphones.indexOf(s4);
-        System.out.println(indexSmartphone4);
+        System.out.println(smartphones.get(indexSmartphone4));
     }
 }
