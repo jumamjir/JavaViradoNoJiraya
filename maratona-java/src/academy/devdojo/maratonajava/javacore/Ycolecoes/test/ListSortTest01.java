@@ -6,7 +6,7 @@ import java.util.List;
 
 public class ListSortTest01 {
     public static void main(String[] args) {
-        List<String> mangas = new ArrayList<>();
+        List<String> mangas = new ArrayList<>(6);
         mangas.add("Hellsing Ultimate");
         mangas.add("Bersek");
         mangas.add("Pokemon");
