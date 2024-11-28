@@ -1,4 +1,4 @@
-package academy.devdojo.maratonajava.javacore.Zgenerics;
+package academy.devdojo.maratonajava.javacore.Zgenerics.test;
 
 abstract class Animal {
     public abstract void consulta();
