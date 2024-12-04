@@ -14,7 +14,7 @@ public class OptionalTest01 {
         System.out.println(o3);
         System.out.println("------------");
 
-        Optional<String> nameOptional = Optional.ofNullable(findName("João Pedro"));
+        Optional<String> nameOptional = findName("João Pedro");
         String empty = nameOptional.orElse("Empty");
         System.out.println(empty);
         nameOptional.ifPresent(s -> System.out.println(s.toUpperCase()));
