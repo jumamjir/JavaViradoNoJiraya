@@ -3,6 +3,7 @@ package academy.devdojo.maratonajava.javacore.ZZEstreams.test;
 import academy.devdojo.maratonajava.javacore.ZZEstreams.dominio.LightNovel;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,5 +22,13 @@ public class StreamTest11 {
     public static void main(String[] args) {
         System.out.println(lightNovels.stream().count());
         System.out.println(lightNovels.stream().collect(Collectors.counting()));
+
+
+        lightNovels.stream().max(Comparator.comparing(LightNovel:: getPrice)).ifPresent(System.out::println);
+        lightNovels.stream().collect(Collectors.maxBy(Comparator.comparing(LightNovel::getPrice))).ifPresent(System.out::println);
+
+        lightNovels.stream().mapToDouble(LightNovel :: getPrice).sum();
+
+
     }
 }
