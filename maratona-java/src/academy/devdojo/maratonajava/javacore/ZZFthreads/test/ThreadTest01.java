@@ -38,6 +38,11 @@ class ThreadExampleRunnable implements Runnable {
             if (i % 100 == 0) {
                 System.out.println(); // Pula para uma nova linha a cada 100 caracteres
             }
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
 
     }
@@ -47,12 +52,13 @@ class ThreadExampleRunnable implements Runnable {
 public class ThreadTest01 {
     public static void main(String[] args) {
         // Criação de threads utilizando a interface Runnable
-        Thread t1 = new Thread (new ThreadExampleRunnable('A'));
-        Thread t2 = new Thread (new ThreadExampleRunnable('B'));
-        Thread t3 = new Thread (new ThreadExampleRunnable('C'));
-        Thread t4 = new Thread (new ThreadExampleRunnable('D'));
+        Thread t1 = new Thread (new ThreadExampleRunnable('A'),"T1A");
+        Thread t2 = new Thread (new ThreadExampleRunnable('B'),"T2B");
+        Thread t3 = new Thread (new ThreadExampleRunnable('C'),"T3C");
+        Thread t4 = new Thread (new ThreadExampleRunnable('D'),"T4D");
 
         // Inicia a execução das threads
+        t4.setPriority(Thread.MAX_PRIORITY);
         t1.start();
         t2.start();
         t3.start();
