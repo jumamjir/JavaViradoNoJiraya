@@ -43,13 +43,16 @@ class ThreadExampleRunnable implements Runnable {
     }
 }
 
+// Demonstração da criação e execução de threads, utilizando tanto a classe Thread quanto a interface Runnable
 public class ThreadTest01 {
     public static void main(String[] args) {
+        // Criação de threads utilizando a interface Runnable
         Thread t1 = new Thread (new ThreadExampleRunnable('A'));
         Thread t2 = new Thread (new ThreadExampleRunnable('B'));
         Thread t3 = new Thread (new ThreadExampleRunnable('C'));
         Thread t4 = new Thread (new ThreadExampleRunnable('D'));
 
+        // Inicia a execução das threads
         t1.start();
         t2.start();
         t3.start();
