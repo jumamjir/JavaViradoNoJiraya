@@ -37,11 +37,12 @@ public class Members {
             return this.emails.poll();
         }
     }
+
     public void close() {
         open = false;
         synchronized (this.emails) {
             System.out.println(Thread.currentThread().getName() + "Notificando todo mundo que não estamos mais recebendo emails");
-
+            this.emails.notifyAll();
         }
     }
 }

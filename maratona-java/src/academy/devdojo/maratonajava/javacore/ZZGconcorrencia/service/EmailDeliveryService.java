@@ -1,6 +1,7 @@
 package academy.devdojo.maratonajava.javacore.ZZGconcorrencia.service;
 
-import academy.devdojo.maratonajava.javacore.ZZFthreads.dominio.Members;
+
+import academy.devdojo.maratonajava.javacore.ZZGconcorrencia.dominio.Members;
 
 public class EmailDeliveryService implements Runnable {
     private final Members members;
