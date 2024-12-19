@@ -20,7 +20,13 @@ public class CopyOnWriteTest01 {
                 e.printStackTrace();
             }
         };
-        Runnable runnableIterator = () -> {
-
+        Runnable runnableRemover = () -> {
+            for (int i = 0; i < 500; i++) {
+                System.out.printf("%s removed %d%n", Thread.currentThread().getName(), i);
+            }
+        };
+        new Thread(runnableIterator).start();
+        new Thread(runnableIterator).start();
+        new Thread(runnableRemover).start();
     }
 }
