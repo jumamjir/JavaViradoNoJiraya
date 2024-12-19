@@ -9,6 +9,8 @@ public class LockingQueueTest01 {
         bq.put("William");
         System.out.printf("%s added the value %s%n", Thread.currentThread().getName(), bq.peek());
         System.out.println("Trying to add another value");
+        bq.put("Suane");
+        System.out.printf("%s added the value %s%n", Thread.currentThread().getName(), bq.peek());
 
 
     }
