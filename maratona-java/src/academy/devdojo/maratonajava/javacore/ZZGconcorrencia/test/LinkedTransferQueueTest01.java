@@ -13,10 +13,16 @@ public class LinkedTransferQueueTest01 {
         System.out.println(tq.offer("JoaoPedro"));
         System.out.println(tq.offer("JoaoPedro", 10, TimeUnit.SECONDS));
         tq.put("DevDojo");
-        if(tq.hasWaitingConsumer()) {
+        if (tq.hasWaitingConsumer()) {
             tq.transfer("DevDojo");
         }
-        tq.transfer("DevDojo");
+        System.out.println(tq.tryTransfer("Academy"));
+        System.out.println(tq.tryTransfer("Academy", 5, TimeUnit.SECONDS));
+        System.out.println(tq.element());
+        System.out.println(tq.peek());
+        System.out.println(tq.poll());
+        System.out.println(tq.remove());
+        System.out.println(tq.take());
         System.out.println(tq.remainingCapacity());
     }
 }
