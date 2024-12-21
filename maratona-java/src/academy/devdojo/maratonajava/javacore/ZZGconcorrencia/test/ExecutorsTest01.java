@@ -26,13 +26,18 @@ class Printer implements Runnable {
 public class ExecutorsTest01 {
     public static void main(String[] args) {
 //        System.out.println(Runtime.getRuntime().availableProcessors());
-        ExecutorService executorService = Executors.newFixedThreadPool(4);
+//        ExecutorService executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
+//        ExecutorService executorService = Executors.newSingleThreadExecutor();
+        ExecutorService executorService = Executors.newCachedThreadPool();
         executorService.execute(new Printer(1));
         executorService.execute(new Printer(2));
         executorService.execute(new Printer(3));
         executorService.execute(new Printer(4));
         executorService.execute(new Printer(5));
         executorService.execute(new Printer(6));
+        executorService.shutdown();
+        while(!executorService.isTerminated()) {}
+        System.out.println("Programa finalizado");
 
 
     }
