@@ -1,5 +1,6 @@
 package academy.devdojo.maratonajava.javacore.ZZGconcorrencia.test;
 
+import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 class Printer implements Runnable {
@@ -23,6 +24,9 @@ class Printer implements Runnable {
 
 public class ExecutorsTest01 {
     public static void main(String[] args) {
+        System.out.println(Runtime.getRuntime().availableProcessors());
+
+//        Executors.newFixedThreadPool(1).execute(new Printer(1));
 
     }
 }
