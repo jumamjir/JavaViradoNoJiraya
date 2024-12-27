@@ -24,13 +24,18 @@ public class Person {
                 '}';
     }
 
+
     public static final class PersonBuilder {
         private String firstName;
         private String lastName;
         private String username;
         private String email;
 
-        public PersonBuilder() {
+        private PersonBuilder() {
+        }
+
+        public static PersonBuilder builder() {
+            return new PersonBuilder();
         }
 
         public PersonBuilder firstName(String firstName) {
