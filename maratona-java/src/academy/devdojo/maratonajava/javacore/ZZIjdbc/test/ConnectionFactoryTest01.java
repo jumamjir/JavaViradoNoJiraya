@@ -18,8 +18,8 @@ public class ConnectionFactoryTest01 {
 //        List<Producer> producers = ProducerService.findAll();
 //        List<Producer> producers = ProducerService.findByName("mad");
 //        log.info("Producers found '{}'", producers);
-
-        ProducerService.showProducerMetaData();
+//        ProducerService.showProducerMetaData();
+        ProducerService.showDriverMetaData();
 
     }
 
