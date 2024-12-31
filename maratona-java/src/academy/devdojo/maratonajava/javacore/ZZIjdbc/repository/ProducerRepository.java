@@ -7,6 +7,7 @@ import lombok.extern.log4j.Log4j2;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Callable;
 
 @Log4j2
 public class ProducerRepository {
@@ -43,6 +44,7 @@ public class ProducerRepository {
             log.error("Error while trying to update producer '{}'", producer.getId(), e);
         }
     }
+
     public static void updatePreparedStatement(Producer producer) {
         try (Connection conn = ConnectionFactory.getConnection();
              PreparedStatement ps = preparedStatementUpdate(conn, producer)) {
@@ -52,11 +54,12 @@ public class ProducerRepository {
             log.error("Error while trying to update producer '{}'", producer.getId(), e);
         }
     }
-    private static PreparedStatement preparedStatementUpdate(Connection conn,Producer producer) throws SQLException {
+
+    private static PreparedStatement preparedStatementUpdate(Connection conn, Producer producer) throws SQLException {
         String sql = "UPDATE `anime_store`.`producer` SET `name` = ? WHERE (`id` = ?);";
         PreparedStatement ps = conn.prepareStatement(sql);
-        ps.setString(1,  producer.getName());
-        ps.setInt(2,  producer.getId());
+        ps.setString(1, producer.getName());
+        ps.setInt(2, producer.getId());
         return ps;
     }
 
@@ -107,7 +110,35 @@ public class ProducerRepository {
         return producers;
     }
 
-    private static PreparedStatement preparedStatementFindByName(Connection conn,String name) throws SQLException {
+    public static List<Producer> findByNameCallableStatement(String name) {
+        log.info("Finding Producers By name");
+        List<Producer> producers = new ArrayList<>();
+        try (Connection conn = ConnectionFactory.getConnection();
+             PreparedStatement ps = callableStatementFindByName(conn, name);
+             ResultSet rs = ps.executeQuery()) {
+
+            while (rs.next()) {
+                Producer producer = Producer
+                        .builder()
+                        .id(rs.getInt("id"))
+                        .name(rs.getString("name"))
+                        .build();
+                producers.add(producer);
+            }
+        } catch (SQLException e) {
+            log.error("Error while trying to find all producers ", e);
+        }
+        return producers;
+    }
+
+    private static CallableStatement callableStatementFindByName(Connection conn, String name) throws SQLException {
+        String sql = "CALL `anime_store`.`sp_get_producer_by_name`(?);";
+        CallableStatement cs = conn.prepareCall(sql);
+        cs.setString(1, String.format("%%%s%%", name));
+        return cs;
+    }
+
+    private static PreparedStatement preparedStatementFindByName(Connection conn, String name) throws SQLException {
         String sql = "select * from anime_store.producer where name like ?;";
         PreparedStatement ps = conn.prepareStatement(sql);
         ps.setString(1, String.format("%%%s%%", name));
