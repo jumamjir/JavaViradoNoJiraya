@@ -3,6 +3,7 @@ package academy.devdojo.maratonajava.javacore.ZZJcrud.service;
 import academy.devdojo.maratonajava.javacore.ZZJcrud.dominio.Producer;
 import academy.devdojo.maratonajava.javacore.ZZJcrud.repository.ProducerRepository;
 
+import java.util.Optional;
 import java.util.Scanner;
 
 public class ProducerService {
@@ -13,6 +14,7 @@ public class ProducerService {
             case 1 -> findByName();
             case 2 -> delete();
             case 3 -> save();
+            case 4 -> update();
             default -> throw new IllegalArgumentException("Not a valid option");
         }
     }
@@ -33,6 +35,7 @@ public class ProducerService {
             ProducerRepository.delete(id);
         }
     }
+
     private static void save() {
         System.out.println("Type the name of the producer");
         String name = SCANNER.nextLine();
@@ -41,4 +44,23 @@ public class ProducerService {
 
     }
 
+    private static void update() {
+        System.out.println("Type the id of the object you want to update");
+        Optional<Producer> producerOptional = ProducerRepository.findById(Integer.parseInt(SCANNER.nextLine()));
+        if (producerOptional.isEmpty()) {
+            System.out.println("Producer not found");
+            return;
+        }
+
+        Producer producerFromDb = producerOptional.get();
+        System.out.println("Producer found: " + producerFromDb);
+        System.out.println("Type the new name or enter to keep the same");
+        String name = SCANNER.nextLine();
+        name = name.isEmpty() ? producerFromDb.getName() : name;
+        Producer.ProducerBuilder producerToUpdate = Producer.builder()
+                .id(producerFromDb.getId())
+                .name(name);
+
+        ProducerRepository.update(producerToUpdate.build());
+    }
 }
