@@ -71,6 +71,33 @@ public class ProducerRepository {
         return producers;
     }
 
+    public static List<Producer> findByNamePreparedStatement(String name) {
+        log.info("Finding Producers By name");
+        String sql = "select * from anime_store.producer where name like ?;";
+        List<Producer> producers = new ArrayList<>();
+        try (Connection conn = ConnectionFactory.getConnection();
+             PreparedStatement ps = createdPreparedStatement(conn, sql, name);
+             ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                Producer producer = Producer
+                        .builder()
+                        .id(rs.getInt("id"))
+                        .name(rs.getString("name"))
+                        .build();
+                producers.add(producer);
+            }
+        } catch (SQLException e) {
+            log.error("Error while trying to find all producers ", e);
+        }
+        return producers;
+    }
+
+    private static PreparedStatement createdPreparedStatement(Connection conn, String sql, String name) throws SQLException {
+        PreparedStatement ps = conn.prepareStatement(sql);
+        ps.setString(1, "%" + name + "%");
+        return ps;
+    }
+
     public static void showProducerMetaData() {
         log.info("Showing Producer Metadata");
         String sql = "select * from anime_store.producer ;";
@@ -203,6 +230,7 @@ public class ProducerRepository {
         }
         return producers;
     }
+
     public static void findByNameAndDelete(String name) {
         log.info("Finding Producers By name");
         String sql = "select * from anime_store.producer where name like '%%%s%%';"
@@ -210,10 +238,10 @@ public class ProducerRepository {
         try (Connection conn = ConnectionFactory.getConnection();
              Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
              ResultSet rs = stmt.executeQuery(sql)) {
-           while(rs.next()){
-               log.info("Deleting '{}'", rs.getString("name"));
-               rs.deleteRow();
-           }
+            while (rs.next()) {
+                log.info("Deleting '{}'", rs.getString("name"));
+                rs.deleteRow();
+            }
         } catch (SQLException e) {
             log.error("Error while trying to find all producers ", e);
         }
